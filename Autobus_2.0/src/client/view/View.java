@@ -1,11 +1,8 @@
 package client.view;
 
-/**
- * Created by lenovo on 4/20/2017.
- */
-public class MainWindow extends Window {
+import javax.swing.JFrame;
 
-	private static final long serialVersionUID = 1L;
+public class View extends JFrame implements ViewInterface {
 
 	@Override
 	public void viewLogin() {
@@ -36,4 +33,5 @@ public class MainWindow extends Window {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

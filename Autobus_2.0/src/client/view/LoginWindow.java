@@ -1,7 +1,6 @@
 package client.view;
 
 import java.awt.Color;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -13,7 +12,7 @@ import javax.swing.JPasswordField;
 /**
  * Created by lenovo on 4/20/2017.
  */
-public class LoginWindow  extends JPanel{
+public class LoginWindow  extends Window {
 	
 	/**
 	 * 
@@ -28,7 +27,7 @@ public class LoginWindow  extends JPanel{
 		createEvents();
 	}
 	
-	private void initComponents(){
+	public void initComponents(){
 		setBackground(new Color(95, 158, 160));
 		setBounds(0, 0, 400, 250);
 		setLayout(null);
@@ -66,10 +65,29 @@ public class LoginWindow  extends JPanel{
 		
 	}
 	
-	private void createEvents(){
+	public void createEvents(){
 		
 		btnLogIn.addActionListener(e ->{
 			//Some action here
 		});
+	}
+
+	@Override
+	public void viewLogin() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showMain() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void loadData() {
+		// TODO Auto-generated method stub
+		
 	}
 }
