@@ -196,17 +196,17 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 			for (int i = 0; i < this.toursArchive.size(); i++) {
 				Bus oldBus = this.toursArchive.get(i).getBus();
 				Chauffeur oldChauffeur = this.toursArchive.get(i).getChauffeursObject();
-				for (int j = 0; j < Autobus.frame.busesArchive.size(); j++) {
-					if(oldBus.getVehicleID().equals(Autobus.frame.busesArchive.get(j).getVehicleID())
-							&& oldBus.getModelString().equals(Autobus.frame.busesArchive.get(j).getModelString())) {
-						toursArchive.get(i).setBus(Autobus.frame.busesArchive.get(j));
+				for (int j = 0; j < Autobus.busesArchive.size(); j++) {
+					if(oldBus.getVehicleID().equals(Autobus.busesArchive.get(j).getVehicleID())
+							&& oldBus.getModelString().equals(Autobus.busesArchive.get(j).getModelString())) {
+						toursArchive.get(i).setBus(Autobus.busesArchive.get(j));
 						break;
 					}
 				}
-				for (int j = 0; j < Autobus.frame.chauffeursArchive.size(); j++) {
-					if(oldChauffeur.getName().equals(Autobus.frame.chauffeursArchive.get(j).getName())
-							&& oldChauffeur.getPhonenumber().equals(Autobus.frame.chauffeursArchive.get(j).getPhonenumber())){
-						toursArchive.get(i).setChauffeur(Autobus.frame.chauffeursArchive.get(j));
+				for (int j = 0; j < Autobus.chauffeursArchive.size(); j++) {
+					if(oldChauffeur.getName().equals(Autobus.chauffeursArchive.get(j).getName())
+							&& oldChauffeur.getPhonenumber().equals(Autobus.chauffeursArchive.get(j).getPhonenumber())){
+						toursArchive.get(i).setChauffeur(Autobus.chauffeursArchive.get(j));
 						break;
 					}
 				}

@@ -36,12 +36,12 @@ public class Autobus extends JFrame {
 	JMenuItem mntmAboutAutobus;
 	JMenuItem mntmExit;
 	ImageIcon icon;
-	ChauffeursArchive chauffeursArchive;
+	static ChauffeursArchive chauffeursArchive;
 	static BusesArchive busesArchive;
-	ToursArchive toursArchive;
-	CustomersArchive customersArchive;
-	PassengersArchive passengersArchive;
-	ReservationsArchive reservationsArchive;
+	static ToursArchive toursArchive;
+	static CustomersArchive customersArchive;
+	static PassengersArchive passengersArchive;
+	static ReservationsArchive reservationsArchive;
 	PriceList priceList;
 	ReservationNumber reservationNumberGenerator;
 	int reservationNumber;

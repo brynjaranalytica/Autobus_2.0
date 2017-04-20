@@ -62,7 +62,7 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
         static ClientController instance;
         static{
             try {
-                new ClientController();
+                instance = new ClientController();
             } catch (RemoteException e) {
                 e.printStackTrace();
                 System.out.println("Could not connect to server");
