@@ -12,9 +12,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-/**
- * Created by lenovo on 4/20/2017.
- */
 public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     private RemoteToursArchive toursArchive;
     //YET TO BE IMPLEMENTED
