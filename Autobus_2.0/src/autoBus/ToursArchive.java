@@ -1,27 +1,47 @@
 package autoBus;
 
+import common.remote_interfaces.RemoteToursArchive;
+import utility.observer.RemoteObserver;
+import utility.observer.RemoteSubjectDelegate;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class ToursArchive implements Serializable{
+public class ToursArchive implements Serializable, RemoteToursArchive{
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Tour> toursArchive;
+	private transient RemoteSubjectDelegate<ArrayList<Tour>> remoteSubjectDelegate;
 	
 	/**
 	 * This is a constructor for this ToursArchive
 	 */
-	public ToursArchive(){
+	public ToursArchive() throws RemoteException{
 		toursArchive=new ArrayList<Tour>();
+		remoteSubjectDelegate = new RemoteSubjectDelegate<>(this);
+		try {
+			UnicastRemoteObject.exportObject(this, 0);
+			@SuppressWarnings("unused")
+			Registry registry = LocateRegistry.createRegistry(1099);
+			Naming.rebind("toursArchive", this);
+		} catch (RemoteException | MalformedURLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	/**
@@ -45,10 +65,10 @@ public class ToursArchive implements Serializable{
 	 * This returns this toursArchive ArrayList<Tour>
 	 * @return this toursArchive
 	 */
-	public ArrayList<Tour> getTours(){
+	/*public ArrayList<Tour> getTours(){
 		return toursArchive;
 	}
-	
+	*/
 	/**
 	 * This returns String with: dateInterval of specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
@@ -109,6 +129,7 @@ public class ToursArchive implements Serializable{
 	 */
 	public void addTour(Tour tour){
 		toursArchive.add(tour);
+		this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -117,6 +138,7 @@ public class ToursArchive implements Serializable{
 	 */
 	public void removeTour(int index){
 		toursArchive.remove(index);
+		this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -200,6 +222,21 @@ public class ToursArchive implements Serializable{
 	 * @return this Tours Archive
 	 */
 	public ArrayList<Tour> getToursArchive() {
+		return toursArchive;
+	}
+
+	@Override
+	public void addObserver(RemoteObserver<ArrayList<Tour>> remoteObserver) throws RemoteException {
+		this.remoteSubjectDelegate.addObserver(remoteObserver);
+	}
+
+	@Override
+	public void deleteObserver(RemoteObserver<ArrayList<Tour>> remoteObserver) throws RemoteException {
+		this.remoteSubjectDelegate.deleteObserver(remoteObserver);
+	}
+
+	@Override
+	public ArrayList<Tour> getTours() throws RemoteException {
 		return toursArchive;
 	}
 }

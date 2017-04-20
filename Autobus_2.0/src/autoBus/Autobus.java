@@ -37,7 +37,7 @@ public class Autobus extends JFrame {
 	JMenuItem mntmExit;
 	ImageIcon icon;
 	ChauffeursArchive chauffeursArchive;
-	BusesArchive busesArchive;
+	static BusesArchive busesArchive;
 	ToursArchive toursArchive;
 	CustomersArchive customersArchive;
 	PassengersArchive passengersArchive;
