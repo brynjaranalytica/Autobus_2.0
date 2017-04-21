@@ -7,7 +7,7 @@ public interface ViewInterface {
 	Window LOGIN = new LoginWindow();
 	Window MAIN = new MainWindow();
 	
-	void viewLogin();
+	void showLogin();
     void showMain();
     void createEvents();
     void initComponents();

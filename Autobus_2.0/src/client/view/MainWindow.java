@@ -1,47 +1,61 @@
 package client.view;
 
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Font;
-import java.util.ArrayList;
+import autoBus.Tour;
 
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.border.LineBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.GroupLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import java.awt.*;
+import java.util.ArrayList;
 
-import client.controller.ClientController;
-import autoBus.Tour;
-
-public class MainWindow extends JPanel {
+public class MainWindow extends Window{
    private static final long serialVersionUID = 1L;
    
    private JTextField searchByDestinationTextField;
    private JTable tableTours;
    private DefaultTableModel toursTable;
    
-   private ClientController controller;
    private ArrayList<Tour> tours;
-   
-   public MainWindow() {
-      // controller = ClientController.getInstance();
-      // tours = controller.getToursFromServer();
-      initComponents();
-      createEvents();
-      listTours();
+
+
+   @Override
+   public void showLogin() {
+
    }
 
-   private void createEvents() {
+   @Override
+   public void showMain() {
+
+   }
+
+   @Override
+   public void loadData() {
+      toursTable = (DefaultTableModel) tableTours.getModel();
+      deleteAllRows(toursTable);
+      Object[] rowData = new Object[9];
+      for (int i = 0; i < tours.size(); i++) {
+         rowData[0] = tours.get(i).getDepartureDate();
+         rowData[1] = tours.get(i).getDestination();
+         rowData[2] = tours.get(i).getPickUpPlacesString();
+         rowData[3] = tours.get(i).getSeatsAvailable();
+         rowData[4] = tours.get(i).getTotalPrice();
+         rowData[5] = tours.get(i).getPricePerPassenger();
+         rowData[6] = tours.get(i).getBusAndType();
+         rowData[7] = tours.get(i).getChauffeur();
+         rowData[8] = tours.get(i).getServicesString();
+         toursTable.addRow(rowData);
+      }
+
+   }
+
+   public void createEvents() {
       // SEARCH BY DESTINATION
       searchByDestinationTextField.getDocument().addDocumentListener(new DocumentListener() {
          public void deleteAllRows(final DefaultTableModel model) {
@@ -205,7 +219,7 @@ public class MainWindow extends JPanel {
    }
    
    // GUI COMPONENTS
-   private void initComponents() {
+   public void initComponents() {
       
       JPanel panel = new JPanel();
       panel.setBackground(new Color(95, 158, 160));
@@ -313,5 +327,7 @@ public class MainWindow extends JPanel {
       setLayout(groupLayout);
    
    }
+
+
 
 }

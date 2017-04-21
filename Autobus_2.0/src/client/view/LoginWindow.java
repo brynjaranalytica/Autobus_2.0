@@ -73,7 +73,7 @@ public class LoginWindow  extends Window {
 	}
 
 	@Override
-	public void viewLogin() {
+	public void showLogin() {
 		// TODO Auto-generated method stub
 		
 	}
