@@ -317,8 +317,8 @@ public class Tour implements Serializable{
 			this.dateInterval = dateInterval;
 		}
 
-	@Override
+	/*@Override
 	public String toString() {
-		return "Destination: " + destination + ". Time period: " + this.getDateIntervalString();
-	}
+		return "Destination: " + destination + ". Time period: " + getDateIntervalString();
+	}*/
 }

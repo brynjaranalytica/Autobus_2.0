@@ -129,7 +129,7 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	 */
 	public void addTour(Tour tour){
 		toursArchive.add(tour);
-		this.remoteSubjectDelegate.notifyObservers(toursArchive);
+		//this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	 */
 	public void removeTour(int index){
 		toursArchive.remove(index);
-		this.remoteSubjectDelegate.notifyObservers(toursArchive);
+		//this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -181,6 +181,7 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 		} finally {
 			objectOutputStream.close();
 		}
+		this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**

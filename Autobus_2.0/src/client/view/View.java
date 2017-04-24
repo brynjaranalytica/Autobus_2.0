@@ -26,6 +26,9 @@ public class View extends JFrame implements ViewInterface {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//setLoginSize();
+		setBounds(100, 100, 420, 300);
+		setLocationRelativeTo(null);
+		//setExtendedState(MAXIMIZED_BOTH);
 		setVisible(true);
 
 
@@ -54,32 +57,28 @@ public class View extends JFrame implements ViewInterface {
 
 	@Override
 	public void showLogin() {
-		// TODO Auto-generated method stub
+		currentWindow.showLogin();
 		
 	}
 
 	@Override
 	public void showMain() {
-		// TODO Auto-generated method stub
-		
+		currentWindow.showMain();
 	}
 
 	@Override
 	public void createEvents() {
-		// TODO Auto-generated method stub
-		
+		currentWindow.createEvents();
 	}
 
 	@Override
 	public void initComponents() {
-		// TODO Auto-generated method stub
-		
+		currentWindow.initComponents();
 	}
 
 	@Override
 	public void loadData() {
-		// TODO Auto-generated method stub
-		
+		currentWindow.loadData();
 	}
 
 }

@@ -1,6 +1,8 @@
 package client.controller;
 
 import autoBus.Tour;
+import client.model.Model;
+import client.view.View;
 import common.remote_interfaces.RemoteToursArchive;
 import utility.observer.RemoteObserver;
 import utility.observer.RemoteSubject;
@@ -11,17 +13,19 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     private RemoteToursArchive toursArchive;
+    private Model model;
     //YET TO BE IMPLEMENTED
-    //private static View view;
+    private static View view;
 
     public static void main(String[] args) {
-        ClientController controller = ClientController.getInstance();
-        ArrayList<Tour> tours = controller.getToursFromServer();
-        for(Tour tour: tours)
-            System.out.println(tour);
+        ClientController.getInstance().model = new Model();
+        view = new View();
+
+
     }
 
     private ClientController() throws RemoteException {
@@ -36,6 +40,13 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
         }
     }
 
+    //CHECKS WHEREVER THE TOURS ARE AVAILABLE IN MODEL ON CLIENT SIDE.
+    // IF NOT - DOWNLOAD TOURS FROM SERVER AND SAVES THEM TO THE MODEL ON CLIENT SIDE.
+    public List<Tour> getTours(){
+        return model.getTours();
+    }
+
+    //DOWNLOADS THE ARRAY LIST OF TOURS FROM SERVER.
     public ArrayList<Tour> getToursFromServer(){
         try {
             return toursArchive.getTours();
@@ -49,10 +60,8 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     @Override
     public void update(RemoteSubject<ArrayList<Tour>> remoteSubject, ArrayList<Tour> tours) throws RemoteException {
         //YET TO BE IMPLEMENTED
-        //view.loadData(tours);
-        for(Tour tour: tours){
-            System.out.println(tour);
-        }
+        model.getTours().setRealList(tours);
+        view.loadData();
     }
 
     private static class Wrapper{ //Instance placed in inner class
