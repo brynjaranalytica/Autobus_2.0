@@ -42,6 +42,7 @@ public class Autobus extends JFrame {
 	static CustomersArchive customersArchive;
 	static PassengersArchive passengersArchive;
 	static ReservationsArchive reservationsArchive;
+	static UsersArchive usersArchive;
 	PriceList priceList;
 	ReservationNumber reservationNumberGenerator;
 	int reservationNumber;
@@ -352,6 +353,9 @@ public class Autobus extends JFrame {
 	 * @throws Exception
 	 */
 	private void loadArchives() throws Exception {
+		usersArchive = new UsersArchive();
+		usersArchive.addUser(new User("zveri", "1234"));
+		usersArchive.addUser(new User("hazamadra", "1111"));
 
 		chauffeursArchive = new ChauffeursArchive();
 		if (chauffeursArchive.isFileFound()) {

@@ -7,6 +7,7 @@ import common.remote_interfaces.RemoteToursArchive;
 import utility.observer.RemoteObserver;
 import utility.observer.RemoteSubject;
 
+import javax.swing.*;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -18,7 +19,6 @@ import java.util.List;
 public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     private RemoteToursArchive toursArchive;
     private Model model;
-    //YET TO BE IMPLEMENTED
     private static View view;
 
     public static void main(String[] args) {
@@ -57,9 +57,21 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
         return null;
     }
 
+    public void login(String username, String password) throws RemoteException{
+        if(toursArchive.login(username, password)){
+            view.showMain();
+        }
+        else
+            JOptionPane.showMessageDialog(view,"Password or username are incorrect.");
+    }
+
+    public void logout() throws RemoteException{
+        toursArchive.deleteObserver(this);
+        view.showLogin();
+    }
+
     @Override
     public void update(RemoteSubject<ArrayList<Tour>> remoteSubject, ArrayList<Tour> tours) throws RemoteException {
-        //YET TO BE IMPLEMENTED
         model.getTours().setRealList(tours);
         view.loadData();
     }

@@ -240,4 +240,15 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	public ArrayList<Tour> getTours() throws RemoteException {
 		return toursArchive;
 	}
+
+	@Override
+	public boolean login(String username, String password) throws RemoteException {
+		ArrayList<User> users = Autobus.usersArchive.getUsers();
+		for(User user: users){
+			if(user.equals(new User(username, password)))
+				return true;
+		}
+
+		return false;
+	}
 }
