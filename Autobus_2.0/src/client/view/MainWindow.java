@@ -13,7 +13,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class MainWindow extends Window{
    private static final long serialVersionUID = 1L;
@@ -22,12 +21,12 @@ public class MainWindow extends Window{
    private JTable tableTours;
    private DefaultTableModel toursTable;
    
-   private ArrayList<Tour> tours;
+   private java.util.List<Tour> tours;
 
 
    @Override
    public void showLogin() {
-
+      view.setCurrentWindow(LOGIN);
    }
 
    @Override
@@ -37,6 +36,8 @@ public class MainWindow extends Window{
 
    @Override
    public void loadData() {
+      tours = controller.getTours();
+
       toursTable = (DefaultTableModel) tableTours.getModel();
       deleteAllRows(toursTable);
       Object[] rowData = new Object[9];
@@ -193,7 +194,7 @@ public class MainWindow extends Window{
    }
    
    // LIST ALL TOURS IN THE TABLE
-   public void listTours() {
+   /*public void listTours() {
       toursTable = (DefaultTableModel) tableTours.getModel();
       deleteAllRows(toursTable);
       Object[] rowData = new Object[9];
@@ -209,7 +210,7 @@ public class MainWindow extends Window{
          rowData[8] = tours.get(i).getServicesString();
          toursTable.addRow(rowData);
       }
-   }
+   }*/
    
    // THIS DELETES ALL ROWS IN THE SELECTED TABLE(USED FOR SEARCH)
    public void deleteAllRows(final DefaultTableModel model) {

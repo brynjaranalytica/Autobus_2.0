@@ -81,7 +81,7 @@ public class LoginWindow  extends Window {
 	@Override
 	public void showMain() {
 		// TODO Auto-generated method stub
-		
+		view.setCurrentWindow(MAIN);
 	}
 
 
