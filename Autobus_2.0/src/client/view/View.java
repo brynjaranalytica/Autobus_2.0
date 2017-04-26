@@ -21,17 +21,17 @@ public class View extends JFrame implements ViewInterface {
 				}
 			}
 		});
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(View.class.getResource("/resources/icon.png")));
 		getContentPane().setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		//setLoginSize();
+		setBounds(100, 100, 420, 300);
+		setLocationRelativeTo(null);
 		setVisible(true);
 
 
 		desktopPane.setLayout(new CardLayout(0,0));
 		getContentPane().add(desktopPane, BorderLayout.CENTER);
-		setCurrentWindow(MAIN);
+		setCurrentWindow(LOGIN);
 		view = this;
 	}
 

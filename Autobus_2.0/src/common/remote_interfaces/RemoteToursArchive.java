@@ -11,4 +11,6 @@ import java.util.ArrayList;
  */
 public interface RemoteToursArchive extends RemoteSubject<ArrayList<Tour>> {
     ArrayList<Tour> getTours() throws RemoteException;
+
+    boolean login(String username, String password) throws RemoteException;
 }

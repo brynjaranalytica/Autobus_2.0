@@ -1,13 +1,9 @@
 package client.view;
 
 import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import java.rmi.RemoteException;
 
 /**
  * Created by lenovo on 4/20/2017.
@@ -21,12 +17,7 @@ public class LoginWindow  extends Window {
 	private JButton btnLogIn;
 	private JTextField textField;
 	private JPasswordField passwordField;
-	
-	public LoginWindow() {
-		initComponents();
-		createEvents();
-	}
-	
+
 	public void initComponents(){
 		setBackground(new Color(95, 158, 160));
 		setBounds(0, 0, 400, 250);
@@ -68,7 +59,15 @@ public class LoginWindow  extends Window {
 	public void createEvents(){
 		
 		btnLogIn.addActionListener(e ->{
-			//Some action here
+			String username = textField.getText();
+			String password = passwordField.getText();
+			try {
+				controller.login(username,password);
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+				JOptionPane.showMessageDialog(LoginWindow.this,"Failed to log in. Could not contact the server.");
+			}
+
 		});
 	}
 
