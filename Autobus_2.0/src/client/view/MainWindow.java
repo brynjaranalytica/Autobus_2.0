@@ -24,6 +24,7 @@ import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainWindow extends Window{
    public MainWindow() {
@@ -240,7 +241,8 @@ public class MainWindow extends Window{
       
       // SEARCH BY DATE INTERVAL
       searchButton.addMouseListener(new MouseAdapter() {
-         public void mouseReleased(MouseEvent e) {
+         @Override
+         public void mouseReleased(java.awt.event.MouseEvent e) {
             String str = new String("");
             int monthStart = 0;
             int monthEnd = 0;
@@ -355,7 +357,7 @@ public class MainWindow extends Window{
                startDate = parseDate(
                      yearStart + "-" + monthStart + "-" + dayStart + "-" + hourStart + "-" + minuteStart);
                endDate = parseDate(yearEnd + "-" + monthEnd + "-" + dayEnd + "-" + hourEnd + "-" + minuteEnd);
-               // listTours(startDate, (int) ((endDate.getTime() - startDate.getTime()) / 3600000));
+               listTours(startDate, endDate);
             } else {
                JOptionPane.showMessageDialog(null, "Some of the fields were filled incorrectly:" + str);
             }
@@ -382,12 +384,12 @@ public class MainWindow extends Window{
    
    // THIS METHOD LISTS TOURS FOR DATE INTERVAL SEARCH
    
-   /*public void listTours(java.util.Date startDate, int durationInHours) {
+   public void listTours(java.util.Date startDate, java.util.Date endDate) {
       selectTourTable = (DefaultTableModel) tableTours.getModel();
       deleteAllRows(selectTourTable);
       Object[] rowData = new Object[9];
          for (int i = 0; i < tours.size(); i++) {
-            if(tours.get(i).getDateInterval().) {
+            if(overlap(startDate, endDate, tours.get(i).getNewDateInterval()[0], tours.get(i).getNewDateInterval()[1])) {
             rowData[0] = tours.get(i).getDepartureDate();
             rowData[1] = tours.get(i).getDestination();
             rowData[2] = tours.get(i).getPickUpPlacesString();
@@ -400,7 +402,12 @@ public class MainWindow extends Window{
             selectTourTable.addRow(rowData);
             }
          }
-   }*/
+   }
+
+   // THIS CHECKS IF THE TIME PERIOD OVERLAPS ANOTHER ONE
+   public boolean overlap(Date start1, Date end1, Date start2, Date end2){
+      return start1.getTime() <= end2.getTime() && start2.getTime() <= end1.getTime() && end2.getTime() <= end1.getTime();
+   }
 
    // GUI COMPONENTS
    public void initComponents() {
