@@ -12,13 +12,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-
-import com.sun.glass.events.MouseEvent;
-
 import java.awt.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.rmi.RemoteException;
 import java.text.ParseException;
@@ -88,17 +82,18 @@ public class MainWindow extends Window{
       //
       //LOGOUT BUTTON
       //
-      /*btnLogout.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent arg0) {
+      btnLogout.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(java.awt.event.MouseEvent e) {
             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from the system?")==0){
                try {
                   controller.logout();
-               } catch (RemoteException e) {
+               } catch (RemoteException ex) {
                   JOptionPane.showMessageDialog(MainWindow.this,"Could not contact the server.");
                }
             }
          }
-      });*/
+      });
 
       //
       // SEARCH BY DESTINATION
@@ -425,7 +420,7 @@ public class MainWindow extends Window{
       lblToursArchive.setForeground(Color.WHITE);
       lblToursArchive.setFont(new Font("Century Gothic", Font.PLAIN, 20));
       
-      JButton btnLogout = new JButton("Log out");
+      btnLogout = new JButton("Log out");
       GroupLayout gl_mainWindowTopPanel = new GroupLayout(mainWindowTopPanel);
       gl_mainWindowTopPanel.setHorizontalGroup(
          gl_mainWindowTopPanel.createParallelGroup(Alignment.LEADING)
