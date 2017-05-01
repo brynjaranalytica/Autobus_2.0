@@ -354,8 +354,8 @@ public class Autobus extends JFrame {
 	 */
 	private void loadArchives() throws Exception {
 		usersArchive = new UsersArchive();
-		usersArchive.addUser(new User("zveri", "1234"));
-		usersArchive.addUser(new User("hazamadra", "1111"));
+		usersArchive.addUser(new User("mogens@gmail.com", "1234"));
+		usersArchive.addUser(new User("hazamadra@hotbox.com", "1111"));
 
 		chauffeursArchive = new ChauffeursArchive();
 		if (chauffeursArchive.isFileFound()) {

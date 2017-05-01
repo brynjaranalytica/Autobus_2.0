@@ -116,7 +116,7 @@ public class MainWindow extends Window{
                   String substringOfDestination = destination.substring(0,
                         searchText.length() <= destination.length() ? searchText.length()
                               : destination.length());
-                  if (substringOfDestination.equals(searchText)) {
+                  if (substringOfDestination.toLowerCase().equals(searchText.toLowerCase())) {
                      rowData[0] = tours.get(i).getDepartureDate();
                      rowData[1] = tours.get(i).getDestination();
                      rowData[2] = tours.get(i).getPickUpPlacesString();
@@ -158,7 +158,7 @@ public class MainWindow extends Window{
                   String substringOfDestination = destination.substring(0,
                         searchText.length() <= destination.length() ? searchText.length()
                               : destination.length());
-                  if (substringOfDestination.equals(searchText)) {
+                  if (substringOfDestination.toLowerCase().equals(searchText.toLowerCase())) {
                      rowData[0] = tours.get(i).getDepartureDate();
                      rowData[1] = tours.get(i).getDestination();
                      rowData[2] = tours.get(i).getPickUpPlacesString();
@@ -200,7 +200,7 @@ public class MainWindow extends Window{
                   String substringOfDestination = destination.substring(0,
                         searchText.length() <= destination.length() ? searchText.length()
                               : destination.length());
-                  if (substringOfDestination.equals(searchText)) {
+                  if (substringOfDestination.toLowerCase().equals(searchText.toLowerCase())) {
                      rowData[0] = tours.get(i).getDepartureDate();
                      rowData[1] = tours.get(i).getDestination();
                      rowData[2] = tours.get(i).getPickUpPlacesString();
