@@ -38,7 +38,7 @@ public class Autobus extends JFrame {
 	ImageIcon icon;
 	static ChauffeursArchive chauffeursArchive;
 	static BusesArchive busesArchive;
-	static ToursArchive toursArchive;
+	public static ToursArchive toursArchive;
 	static CustomersArchive customersArchive;
 	static PassengersArchive passengersArchive;
 	static ReservationsArchive reservationsArchive;

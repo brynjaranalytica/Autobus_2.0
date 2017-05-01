@@ -2,6 +2,7 @@ package client.controller;
 
 import autoBus.Tour;
 import client.model.Model;
+import client.model.ProxyArrayList;
 import client.view.View;
 import common.remote_interfaces.RemoteToursArchive;
 import utility.observer.RemoteObserver;
@@ -71,7 +72,8 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
 
     @Override
     public void update(RemoteSubject<ArrayList<Tour>> remoteSubject, ArrayList<Tour> tours) throws RemoteException {
-        model.getTours().setRealList(tours);
+        ProxyArrayList<Tour> proxyArrayList = (ProxyArrayList<Tour>) model.getTours();
+        proxyArrayList.setRealList(tours);
         view.loadData();
 
     }
