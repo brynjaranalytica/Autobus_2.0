@@ -85,7 +85,7 @@ public class MainWindow extends Window{
       btnLogout.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(java.awt.event.MouseEvent e) {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from the system?")==0){
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from the system?", "", JOptionPane.YES_NO_OPTION)==0){
                try {
                   controller.logout();
                } catch (RemoteException ex) {
