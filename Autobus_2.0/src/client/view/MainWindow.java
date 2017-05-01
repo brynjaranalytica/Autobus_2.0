@@ -428,7 +428,7 @@ public class MainWindow extends Window{
                .addContainerGap()
                .addComponent(lblToursArchive, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
                .addPreferredGap(ComponentPlacement.RELATED, 423, Short.MAX_VALUE)
-               .addComponent(btnLogout, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+               .addComponent(btnLogout, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
                .addGap(234))
       );
       gl_mainWindowTopPanel.setVerticalGroup(

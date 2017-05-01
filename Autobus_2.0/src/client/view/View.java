@@ -49,6 +49,7 @@ public class View extends JFrame implements ViewInterface {
 			window.setVisible(true);
 			desktopPane.add(window);
 			currentWindow = window;
+			setBounds(600, 200, 635, 600);
 		}
 	}
 
