@@ -16,7 +16,7 @@ public class View extends JFrame implements ViewInterface {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				if (JOptionPane.showConfirmDialog(null, "Are you sure you want to exit and close?")==0){
+				if (JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the program?", "", JOptionPane.YES_NO_OPTION)==0){
 					System.exit(0);
 				}
 			}
@@ -24,7 +24,7 @@ public class View extends JFrame implements ViewInterface {
 		getContentPane().setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 420, 300);
+		setBounds(100, 100, 415, 280);
 		setLocationRelativeTo(null);
 		setVisible(true);
 

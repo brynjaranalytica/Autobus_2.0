@@ -85,7 +85,7 @@ public class MainWindow extends Window{
       btnLogout.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseReleased(java.awt.event.MouseEvent e) {
-            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from the system?")==0){
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to log out from the system?", "", JOptionPane.YES_NO_OPTION)==0){
                try {
                   controller.logout();
                } catch (RemoteException ex) {
@@ -427,9 +427,9 @@ public class MainWindow extends Window{
             .addGroup(gl_mainWindowTopPanel.createSequentialGroup()
                .addContainerGap()
                .addComponent(lblToursArchive, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
-               .addPreferredGap(ComponentPlacement.RELATED, 423, Short.MAX_VALUE)
+               .addPreferredGap(ComponentPlacement.RELATED, 519, Short.MAX_VALUE)
                .addComponent(btnLogout, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-               .addGap(234))
+               .addContainerGap())
       );
       gl_mainWindowTopPanel.setVerticalGroup(
          gl_mainWindowTopPanel.createParallelGroup(Alignment.LEADING)
