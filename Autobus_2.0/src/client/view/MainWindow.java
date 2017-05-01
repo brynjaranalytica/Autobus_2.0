@@ -44,6 +44,8 @@ public class MainWindow extends Window{
    private java.util.List<Tour> tours;
    private JLabel searchButton;
 
+   private JLabel clearButton;
+
 
 
    @Override
@@ -80,7 +82,7 @@ public class MainWindow extends Window{
 
    public void createEvents() {
       //
-      //LOGOUT BUTTON
+      // LOGOUT BUTTON
       //
       btnLogout.addMouseListener(new MouseAdapter() {
          @Override
@@ -92,6 +94,27 @@ public class MainWindow extends Window{
                   JOptionPane.showMessageDialog(MainWindow.this,"Could not contact the server.");
                }
             }
+         }
+      });
+      
+      //
+      // CLEAR BUTTON
+      //
+      clearButton.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseReleased(java.awt.event.MouseEvent e) {
+            loadData();
+            searchByDestinationTextField.setText("");
+            startDayTextField.setText("");
+            startMonthTextField.setText("");
+            startYearTextField.setText("");
+            startHourTextField.setText("");
+            startMinuteTextField.setText("");
+            EndDayTextField.setText("");
+            endMonthTextField.setText("");
+            endYearTextField.setText("");
+            endHourTextField.setText("");
+            endMinuteTextField.setText("");
          }
       });
 
@@ -599,22 +622,28 @@ public class MainWindow extends Window{
 
                     new EmptyBorder(3, 3, 3, 3)));
       scrollPaneToursArchive.setBackground(new Color(95, 158, 160));
+      
+       clearButton = new JLabel("Clear");
+      clearButton.setForeground(Color.WHITE);
+      clearButton.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+      clearButton.setBorder(new CompoundBorder(new LineBorder(new Color(255, 255, 255), 1, true), new EmptyBorder(3, 3, 3, 3)));
+      
       GroupLayout gl_panel = new GroupLayout(panel);
       gl_panel.setHorizontalGroup(
-         gl_panel.createParallelGroup(Alignment.TRAILING)
+         gl_panel.createParallelGroup(Alignment.LEADING)
             .addGroup(gl_panel.createSequentialGroup()
-               .addComponent(mainWindowTopPanel, GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
+               .addComponent(mainWindowTopPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                .addGap(0))
-            .addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+            .addGroup(gl_panel.createSequentialGroup()
                .addContainerGap()
                .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
                   .addGroup(gl_panel.createSequentialGroup()
+                     .addComponent(label, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                     .addPreferredGap(ComponentPlacement.RELATED)
+                     .addComponent(searchByDestinationTextField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
+                  .addComponent(lblSearchByDate, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
+                  .addGroup(gl_panel.createSequentialGroup()
                      .addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel.createSequentialGroup()
-                           .addComponent(label, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
-                           .addPreferredGap(ComponentPlacement.RELATED)
-                           .addComponent(searchByDestinationTextField, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lblSearchByDate, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
                         .addGroup(gl_panel.createSequentialGroup()
                            .addComponent(label_1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                            .addPreferredGap(ComponentPlacement.UNRELATED)
@@ -640,9 +669,11 @@ public class MainWindow extends Window{
                            .addPreferredGap(ComponentPlacement.RELATED)
                            .addComponent(endMinuteTextField, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
                      .addGap(30)
-                     .addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+                     .addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                     .addGap(18)
+                     .addComponent(clearButton))
                   .addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 602, GroupLayout.PREFERRED_SIZE))
-               .addContainerGap(522, Short.MAX_VALUE))
+               .addContainerGap(268, Short.MAX_VALUE))
       );
       gl_panel.setVerticalGroup(
          gl_panel.createParallelGroup(Alignment.LEADING)
@@ -677,7 +708,9 @@ public class MainWindow extends Window{
                         .addComponent(endMinuteTextField, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)))
                   .addGroup(gl_panel.createSequentialGroup()
                      .addGap(105)
-                     .addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
+                     .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clearButton, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
                .addPreferredGap(ComponentPlacement.UNRELATED)
                .addComponent(scrollPaneToursArchive, GroupLayout.PREFERRED_SIZE, 301, GroupLayout.PREFERRED_SIZE)
                .addGap(341))
@@ -690,7 +723,14 @@ public class MainWindow extends Window{
          new String[] {
             "Date", "Destination", "Pick up", "Seats Available", "Current Total Price", "Price Per Passenger", "Bus# / type", "Chauffeur", "Services"
          }
-      ));
+      ){
+         boolean[] columnEditables = new boolean[] {
+               false, false, false, false, false, false, false, false, false
+            };
+            public boolean isCellEditable(int row, int column) {
+               return columnEditables[column];
+            }
+         });
       tableTours.setSelectionBackground(new Color(102, 205, 170));
       tableTours.setForeground(Color.WHITE);
       tableTours.setFont(new Font("Century Gothic", Font.PLAIN, 12));

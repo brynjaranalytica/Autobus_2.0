@@ -19,6 +19,7 @@ public class LoginWindow  extends Window {
 	private JPasswordField passwordField;
 
 	public void initComponents(){
+	   
 		setBackground(new Color(95, 158, 160));
 		setBounds(0, 0, 400, 250);
 		setLayout(null);

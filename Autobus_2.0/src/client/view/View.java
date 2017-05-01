@@ -24,9 +24,10 @@ public class View extends JFrame implements ViewInterface {
 		getContentPane().setBackground(Color.WHITE);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 415, 280);
+		setBounds(100, 100, 400, 270);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setResizable(false);
 
 
 		desktopPane.setLayout(new CardLayout(0,0));
@@ -41,6 +42,7 @@ public class View extends JFrame implements ViewInterface {
 			window.setVisible(true);
 			desktopPane.add(window);
 			currentWindow = window;
+			
 		}
 		else{
 			desktopPane.getComponent(0).setVisible(false);
@@ -49,19 +51,20 @@ public class View extends JFrame implements ViewInterface {
 			window.setVisible(true);
 			desktopPane.add(window);
 			currentWindow = window;
-			setBounds(600, 200, 635, 600);
 		}
 	}
 
 	@Override
 	public void showLogin() {
 		currentWindow.showLogin();
-		
+		this.setBounds(100, 100, 400, 270);
+		this.setLocationRelativeTo(null);
 	}
 
 	@Override
 	public void showMain() {
 		currentWindow.showMain();
+		this.setBounds(600, 200, 630, 600);
 	}
 
 	@Override
