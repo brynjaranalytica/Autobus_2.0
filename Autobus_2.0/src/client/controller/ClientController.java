@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     private RemoteToursArchive toursArchive;
-    private Model model;
+    public Model model;
     private static View view;
 
     public static void main(String[] args) {
@@ -28,11 +28,9 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
     }
 
     private ClientController() throws RemoteException {
-        this.model = new Model();
         UnicastRemoteObject.exportObject(this, 0);
         try {
             toursArchive = (RemoteToursArchive) Naming.lookup("rmi://localhost:1099/toursArchive");
-            toursArchive.addObserver(this);
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -59,6 +57,7 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
 
     public void login(String username, String password) throws RemoteException{
         if(toursArchive.login(username, password)){
+            toursArchive.addObserver(this);
             view.showMain();
         }
         else
@@ -93,6 +92,10 @@ public class ClientController implements RemoteObserver<ArrayList<Tour>> {
 
     public static ClientController getInstance(){
         return Wrapper.instance; //Instantiates the instance when called
+    }
+
+    public RemoteToursArchive getToursArchive() {
+        return toursArchive;
     }
 
 }

@@ -60,15 +60,7 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	public Tour get(int index){
 		return toursArchive.get(index);
 	}
-	
-	/**
-	 * This returns this toursArchive ArrayList<Tour>
-	 * @return this toursArchive
-	 */
-	/*public ArrayList<Tour> getTours(){
-		return toursArchive;
-	}
-	*/
+
 	/**
 	 * This returns String with: dateInterval of specified Tour from this ToursArchive ArrayList<Tour>
 	 * @param index - index of Tour
@@ -129,7 +121,6 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	 */
 	public void addTour(Tour tour){
 		toursArchive.add(tour);
-		//this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -138,7 +129,6 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 	 */
 	public void removeTour(int index){
 		toursArchive.remove(index);
-		//this.remoteSubjectDelegate.notifyObservers(toursArchive);
 	}
 	
 	/**
@@ -236,6 +226,10 @@ public class ToursArchive implements Serializable, RemoteToursArchive{
 		this.remoteSubjectDelegate.deleteObserver(remoteObserver);
 	}
 
+	/**
+	 * This returns this toursArchive ArrayList<Tour>
+	 * @return this toursArchive
+	 */
 	@Override
 	public ArrayList<Tour> getTours() throws RemoteException {
 		return toursArchive;

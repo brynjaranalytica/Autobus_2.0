@@ -1,9 +1,14 @@
 package test;
 
+
 import autoBus.Autobus;
 import autoBus.Tour;
 import client.controller.ClientController;
+import client.model.Model;
+import common.remote_interfaces.RemoteToursArchive;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,44 +20,52 @@ public class ClientControllerTest {
 
     private ClientController clientController;
     private ArrayList<Tour> toursFromMainApplication;
+    private RemoteToursArchive toursArchive;
+    private Autobus autobus;
 
-    @org.junit.Before
-    public void setUp() throws Exception {
-        clientController = ClientController.getInstance();
-        Autobus.main(null);
+    @Before
+    public void setUp() throws Exception{
+        autobus = new Autobus();
         toursFromMainApplication = Autobus.toursArchive.getToursArchive();
+        ClientController.getInstance().model = new Model();
+        clientController = ClientController.getInstance();
 
     }
 
-    @org.junit.After
-    public void tearDown() throws Exception {
-        System.exit(0);
-    }
-
-    @org.junit.Test
+    @Test
     public void getToursTest() throws Exception {
+
+
         List<Tour> tours = clientController.getTours();
-        //Assert.assertEquals();
+
+        Assert.assertEquals(tours.get(0), toursFromMainApplication.get(0));
+        Assert.assertEquals(tours.get(1), toursFromMainApplication.get(1));
+        Assert.assertEquals(tours.get(2), toursFromMainApplication.get(2));
     }
 
-    @org.junit.Test
+    @Test
     public void getToursFromServerTest() throws Exception {
+        List<Tour> tours = clientController.getToursFromServer();
 
+        Assert.assertEquals(tours.get(0), toursFromMainApplication.get(0));
+        Assert.assertEquals(tours.get(1), toursFromMainApplication.get(1));
+        Assert.assertEquals(tours.get(2), toursFromMainApplication.get(2));
     }
 
-    @org.junit.Test
+    @Test
     public void loginTest() throws Exception {
+        toursArchive = clientController.getToursArchive();
 
+        boolean loginBoolean1 = toursArchive.login("wrongEmail1", "wrongPassword1");
+        Assert.assertFalse(loginBoolean1);
+        boolean loginBoolean2 = toursArchive.login("wrongEmail1", "wrongPassword1");
+        Assert.assertFalse(loginBoolean2);
+
+        boolean loginBoolean3 = toursArchive.login("mogens@gmail.com", "1234");
+        Assert.assertTrue(loginBoolean3);
+        boolean loginBoolean4 = toursArchive.login("hazamadra@hotbox.com", "1111");
+        Assert.assertTrue(loginBoolean4);
     }
 
-    @org.junit.Test
-    public void logoutTest() throws Exception {
-
-    }
-
-    @org.junit.Test
-    public void updateTest() throws Exception {
-
-    }
 
 }

@@ -317,8 +317,14 @@ public class Tour implements Serializable{
 			this.dateInterval = dateInterval;
 		}
 
-	/*@Override
-	public String toString() {
-		return "Destination: " + destination + ". Time period: " + getDateIntervalString();
-	}*/
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Tour))
+			return false;
+
+		Tour tour = (Tour) obj;
+		return this.getDestination().equals(tour.getDestination()) &&
+				this.getDateIntervalString().equals(tour.getDateIntervalString()) &&
+				this.getSeatsAvailable() == tour.getSeatsAvailable();
+	}
 }
